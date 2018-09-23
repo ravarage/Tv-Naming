@@ -4,9 +4,12 @@ rename and download subtitle for you
 to install first you need to install https://github.com/mamins1376/Subscene-API
 after that you install requirement like this 
       
-``git clone https://github.com/ravarage/Tv-Naming.git``
-then you run 
-cd TV-Naming && sudo pip install -r requirements.txt
+`git clone https://github.com/ravarage/Tv-Naming.git`
+
+>then you run 
+
+
+`cd TV-Naming && sudo pip install -r requirements.txt`
 
 
 
