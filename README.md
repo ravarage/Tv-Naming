@@ -1,21 +1,13 @@
 # Tv-Naming
-rename and download subtitle for you
+Easy App to manage your TV Shows and anime series episode  name 
 
-to install first you need to install https://github.com/mamins1376/Subscene-API
-after that you install requirement like this 
-      
-`git clone https://github.com/ravarage/Tv-Naming.git`
+its easy to use open source, both binary and code avaialbe
 
->then you run 
+code written in python 3
 
+Library Used PYQT5 and pytvmaze
 
-`cd TV-Naming && sudo pip install -r requirements.txt`
-
-
-
-you should be abe to run Tvnaming .py just fine 
-
-and there are easy installer deb and windows installer  available for you to install it and start working 
+easy to use 
 
 
 
