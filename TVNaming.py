@@ -6,24 +6,11 @@ import threading
 from splash import Ui_MainWindow as sp
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMessageBox , QDialogButtonBox,QFileDialog
 import sys
-import sqlite3
 from namingU import Ui_MainWindow as mainos
 from rename import Ui_MainWindow as renameod
-import platform
-import urllib3
-http = urllib3.PoolManager()
 import pytvmaze
 import re
-import webbrowser
 import os
-import inflect
-import subscene
-from os.path import expanduser
-import requests
-import zipfile
-
-urllib3.disable_warnings()
-p = inflect.engine()
 dir = []
 sources = []
 output = []
@@ -31,239 +18,6 @@ errors = [0]
 prog = [0]
 extentions = ['.aqt', '.cvd', '.dks', '.jss', '.sub', '.ttxt', '.mpl', '.txt', '.sub', '.pjs', '.psb', '.rt',
                       '.smi', '.ssf', '.srt', '.ssa', '.sub', '.svcd', '.usf', '.sub,', '.txt', '.ass']
-class extratror(object):
-    filessub = []
-    idx = []
-    custemdict = {}
-    def deepmoed(self,tt,yy):
-        errors.insert(0,2)
-        errors.insert(1,yy)
-
-    def extractor(self,fir,all,tt):
-        try:
-            self.zip_ref = zipfile.ZipFile(all, 'r')
-        except:
-            self.deepmoed(tt,fir)
-        else:
-            self.zip_ref.extractall(self.downfolder)
-            self.zip_ref.close()
-
-
-
-
-
-    def __init__(self,language,tt):
-        self.downfolder = str(dir[0]) + '/' + 'dummytemp'
-        for self.file in os.listdir(self.downfolder):
-            if self.file.endswith('.zip'):
-                self.fuldir = self.downfolder + '/' + self.file
-                self.extractor(all=self.fuldir,fir=self.file,tt=tt)
-
-        for self.subtitle in  os.listdir(self.downfolder):
-            for self.extention in extentions:
-                if self.subtitle.endswith(self.extention):
-                    self.filessub.append(self.subtitle)
-                elif self.subtitle.endswith(".idx"):
-                    self.idx.append(self.subtitle)
-        if len(self.idx) != 0:
-            for self.sub in self.filessub:
-                for self.idxs in self.idx:
-                    if self.sub[:-4] == self.idxs:
-                        self.temp = {self.sub:self.idxs}
-                        self.custemdict.update(self.temp)
-
-        else:
-            for self.names in sources:
-                for self.subfileoo in self.filessub:
-                    self.one = re.findall(r'\d+', self.names)
-                    self.two = re.findall(r'\d+', self.subfileoo)
-                    if self.one[1] == self.two[1]:
-                        self.out = str(dir[0]) + "/" + self.names[:-4] + '.' + language + self.subfileoo[-4:]
-                        self.input = self.downfolder  + '/' + self.subfileoo
-                        os.rename(self.input,self.out)
-        if len(self.idx) != 0:
-            for self.names in sources:
-                for self.subfileoo, self.idname in self.custemdict.items():
-                    self.one = re.findall(r'\d+', self.names)
-                    self.two = re.findall(r'\d+', self.subfileoo)
-                    if self.one[1] == self.two[1]:
-                        self.out2 = str(dir[0]) + "/" + self.names[:-4] + '.' + language + self.idname[-4:]
-                        self.out = str(dir[0]) + "/" + self.names[:-4] + '.' + language + self.subfileoo[-4:]
-                        self.input = self.downfolder + '/' + self.subfileoo
-                        os.rename(self.input, self.out)
-                        os.rename(self.input, self.out2)
-
-        prog.insert(0,100)
-        self.filessub.clear()
-        self.idx.clear()
-        self.custemdict.clear()
-
-        sources.clear()
-        output.clear()
-
-
-
-
-
-class subscenes(object):
-    tempdata = {}
-    templan = []
-    tempfine = []
-    downloaded = []
-    def deepmoed(self,tt):
-        errors.insert(0,3)
-    def nosub(self,tt):
-        errors.insert(0,2)
-        prog.insert(0,100)
-
-    def downloaders(self,some):
-        try:
-            self.zipfile = http.request('GET', self.subtitle[some].zipped_url,
-                                        preload_content=False)
-        except:
-            self.downloaders(some)
-        else:
-            self.downfolder = str(dir[0]) + '/' + 'dummytemp' + '/' + str(self.subtitle[some]) + '.zip'
-            with open(self.downfolder, 'wb') as self.gb:
-                self.gb.write(self.zipfile.read())
-            self.gb.close()
-
-
-
-
-    def __init__(self,name,kind,season,hearing,langugage,tt):
-        if prog[0] < 5:
-            prog.insert(0,5)
-        self.u = 0
-
-        self.seasonchars = p.ordinal(season)
-        self.seasonnumber =  p.number_to_words(self.seasonchars)
-        self.searchname  = name + " - " + self.seasonnumber + " " + "Season"
-
-        try:
-            self.film = subscene.search(self.searchname)
-            self.subtitle = self.film.subtitles
-        except:
-            self.deepmoed(tt)
-            try:
-                self.film = subscene.search(name)
-                self.subtitle = self.film.subtitles
-            except:
-                self.nosub(tt)
-            else:
-                if prog[0] < 10:
-                    prog.insert(0, 10)
-                for self.all in self.subtitle:
-                    self.tempdict = {self.u: self.all.language}
-                    self.tempdata.update(self.tempdict)
-                    self.u += 1
-        else:
-            if prog[0] < 10:
-                prog.insert(0,10)
-            for self.all in self.subtitle:
-                self.tempdict = {self.u:self.all.language}
-                self.tempdata.update(self.tempdict)
-                self.u += 1
-        if prog[0] < 15:
-            prog.insert(0, 15)
-        for self.id,self.lang in self.tempdata.items():
-            if self.lang == langugage:
-                self.templan.append(self.id)
-        if prog[0] < 20:
-            prog.insert(0,20)
-        if hearing == True:
-            for self.file in self.templan:
-                if ("hi" in self.subtitle[int(self.file)].description.lower()) and ("hi removed" not in self.subtitle[int(self.file)].description.lower()):
-                    self.tempfine.append(self.file)
-        else:
-            for self.file in self.templan:
-                if ("hi" not in self.subtitle[int(self.file)].description.lower()) or ("hi removed"  in self.subtitle[int(self.file)].description.lower()):
-                    self.tempfine.append(self.file)
-        if prog[0] < 25:
-            prog.insert(0, 25)
-        self.templan.clear()
-        if kind == "one":
-            for self.fine in self.tempfine:
-                self.templan.append(self.fine)
-        elif kind == "two":
-            for self.fine in self.tempfine:
-                if "bluray" in str(self.subtitle[self.fine]).lower():
-                    self.templan.append(self.fine)
-
-        elif kind == "three":
-            for self.fine in self.tempfine:
-                if "web" in str(self.subtitle[self.fine]).lower():
-                    self.templan.append(self.fine)
-        elif kind == "four":
-            for self.fine in self.tempfine:
-                if "hdtv" in str(self.subtitle[self.fine]).lower():
-                    self.templan.append(self.fine)
-        else:
-            self.nosub(tt)
-        if prog[0] < 30:
-            prog.insert(0,30)
-
-        self.tempfine.clear()
-        if prog[0] < 35:
-            self.kilo = 35
-        else:
-            self.kilo = int(prog[0])
-        os.chdir(str(dir[0]))
-        try:
-            os.makedirs('dummytemp')
-        except:
-            pass
-        else:
-            pass
-        self.numberoffiles = len(output) + 1
-
-        for self.download in self.templan:
-            prog.insert(0,self.kilo)
-            if self.subtitle[self.download] not in self.tempfine:
-                for self.filereader in range(1,self.numberoffiles):
-                    if kind == "one":
-
-                        if "{0:0=2d}".format(self.filereader) not in self.downloaded:
-                            self.test = 70 / self.numberoffiles
-
-                            self.kilo = int(self.test) + self.kilo
-
-                            self.downloaders(self.download)
-                            self.downloaded.append(self.filereader)
-                            self.zipfile.release_conn()
-                    elif kind == "two":
-
-                        if len(self.downloaded) == 0:
-
-                            self.zipfile = http.request('GET', self.subtitle[self.download].zipped_url,
-                                                        preload_content=False)
-                            self.downloaders(self.download)
-                            self.kilo = 90
-                            self.zipfile.release_conn()
-                            self.downloaded.append('done')
-
-
-                    if kind == "three" or kind == "four":
-                        self.gauging = str("{0:0=2d}".format(int(season))) + str("{0:0=2d}".format(int(self.filereader)))
-                        if self.gauging not in self.downloaded:
-
-                            if (str("{0:0=2d}".format(int(self.filereader)))  in str(self.subtitle[self.download])) and (str("{0:0=2d}".format(int(season))) in str(self.subtitle[self.download])) == True:
-                                self.test = 70 / self.numberoffiles
-
-                                self.kilo = int(self.test) + self.kilo
-
-
-                                self.downloaders(self.download)
-
-                                self.downloaded.append(self.gauging)
-                                self.zipfile.release_conn()
-        extratror(langugage,tt)
-        self.tempdata.clear()
-        self.templan.clear()
-        self.tempfine.clear()
-        self.downloaded.clear()
-
-
 
 
 
@@ -337,7 +91,10 @@ class rename(QtWidgets.QMainWindow):
         self.sourcename = self.ui.treeView.model().data(self.sourceid, QtCore.Qt.DisplayRole)
         self.outid = self.ui.treeView_2.model().index(self.num, 0)
         self.outname = self.ui.treeView_2.model().data(self.outid, QtCore.Qt.DisplayRole)
-        self.outputful = self.outname +  self.sourcename[-4:]
+        remove_punctuation_map = dict((ord(char), None) for char in '\/*?:"<>|')
+        d = self.outname.translate(remove_punctuation_map)
+
+        self.outputful = d +  self.sourcename[-4:]
         self.sourcefulenth = str(dir[0]) + '/' + self.sourcename
         self.outfulenth = str(dir[0]) + '/' + self.outputful
         os.rename(self.sourcefulenth, self.outfulenth)
@@ -755,6 +512,7 @@ class ApplicationWindow(QtWidgets.QMainWindow):
         self.out = "    " +  self.out
         self.ui.label_2.setText(self.out)
     def previewworks(self):
+        u = 0
         output.clear()
         sources.clear()
         self.output.clear()
@@ -790,9 +548,16 @@ class ApplicationWindow(QtWidgets.QMainWindow):
                         self.output.append(self.episode.title)
                         self.tester()
                         self.counter()
+                        u = u +1
+        if u > 0:
+            self.preview()
+                            
+        else:
+         pass
+                            
 
 
-                        self.preview()
+                        
 
 
 
@@ -853,12 +618,25 @@ class ApplicationWindow(QtWidgets.QMainWindow):
         self.number2_group.addButton(self.ui.radioButton_4)
         self.number2_group.addButton(self.ui.radioButton_5)
         self.number2_group.addButton(self.ui.radioButton_6)
+        
 
         self.ui.radioButton.setChecked(True)
         self.ui.radioButton_4.setChecked(True)
+        self.ui.radioButton.hide()
+        self.ui.radioButton_2.hide()
+        self.ui.radioButton_3.hide()
+        self.ui.radioButton_7.hide()
+        self.ui.comboBox.hide()
+        self.ui.checkBox.hide()
+        self.ui.label.hide()
+        self.ui.pushButton.hide()
+
+        
+        
         self.ui.pushButton_4.clicked.connect(self.tags)
 
-        self.addcombo()
+        #self.addcombo()
+
 class splash(QtWidgets.QMainWindow):
     def reading(self):
         self.read = prog[0]
@@ -892,5 +670,7 @@ def main():
 
 
 if __name__ == "__main__":
+
+
     tvm = pytvmaze.TVMaze()
     main()
