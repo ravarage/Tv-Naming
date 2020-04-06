@@ -1,4 +1,4 @@
-<a href="https://github.com/ravarage/Tv-Naming/releases" align="middle">TvNaming</a><br><img src="https://i.postimg.cc/gjp2z4cy/TVNaming-J60-ZXwo-S4s.png" alt="TvNaming" align="middle"><br>
+<a href="https://github.com/ravarage/Tv-Naming/releases" align="middle">TvNaming</a><br><br>
 <label>Software design to get episode names for Tv Series and anime from tvmaze and Rename your files for you</label>
 <ul>
     <li>The Software Written in Python</li>
@@ -10,3 +10,4 @@
 </ul>
 <label class="Statues"><b>Project Status: </b></label><label>Stable</label><br>
 <label class="Statues"><b>Project Version: </b></label><label>1.0.1</label>
+<img src="https://i.postimg.cc/gjp2z4cy/TVNaming-J60-ZXwo-S4s.png" alt="TvNaming" align="middle">
